@@ -1,6 +1,6 @@
 # inpainting
 
-Goal of inpainting is to complete **sinograms** (radon transforms) as acquired from **computer tomographic** (CT) imaging using a **deep convolutional adversarial neural net** (DCGAN). The desired sinograms need to be completed since we aim at reducing the number of projections and therefore to effectively reduce the dose from x-rays that a patient would be exposed to.
+Goal of inpainting is to complete **sinograms** (radon transforms) as acquired from **computer tomographic** (CT) imaging using a **deep convolutional adversarial neural net** (DCGAN). The desired sinograms need to be completed since we aim at reducing the number of projections and therefore to effectively reduce the dose from x-rays that a patient would be exposed to. The images show sinograms of ellipses at many (left) and less (right) projections.
 
 ![Simulated Volume of Random Ellipses](Images/randEllRadEx.png)
 ![Simulated Volume of Random Ellipses](Images/randEllRedRadEx.png)
