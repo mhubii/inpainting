@@ -1,5 +1,6 @@
 import numpy as np
 from skimage.draw import ellipse
+import scipy.misc
 
 
 class Create2DRandVol:
@@ -54,9 +55,9 @@ class Create2DRandVol:
 
 if __name__ == '__main__':
     # set some initial parameters
-    nx = 256
+    nx = 512
     ny = 512
-    nVol = 10
+    nVol = 1
 
     # create random volume of ellipses
     vol = Create2DRandVol(nx, ny)
@@ -71,5 +72,6 @@ if __name__ == '__main__':
     data = np.asarray(data).reshape([nVol, nx, ny])
 
     # save data
-    np.save('randVol1k', data)
+    np.save('Data/randVol1k', data)
+    scipy.misc.imsave('Images/randEll.png', data[0])
 

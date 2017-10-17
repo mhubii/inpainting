@@ -8,14 +8,15 @@
 
 import numpy as np
 from skimage.transform import radon
+import scipy.misc
 
 # set the resolution of the volume and the number of volumes.
-nx = 256
+nx = 512
 ny = 512
-nVol = 10
+nVol = 1
 
 # load data
-data = np.load('randVol1k.npy')
+data = np.load('Data/randVol1k.npy')
 data.reshape([nVol, nx, ny])
 
 # perform the radon transformation
@@ -42,5 +43,8 @@ for n in range(nVol):
     redData[n, :, 0:aRed:daRed] = data[n, :, 0:aRed:daRed]
 
 # save data
-np.save('radonRandVol1kGroundTruth', data)
-np.save('radonRandVol1kReduced', redData)
+np.save('Data/radonRandVol1kGroundTruth', data)
+np.save('Data/radonRandVol1kReduced', redData)
+
+scipy.misc.imsave('Images/randEllRad.png', data[0])
+scipy.misc.imsave('Images/randEllRedRad.png', redData[0])
