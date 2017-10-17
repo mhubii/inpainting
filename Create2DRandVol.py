@@ -1,26 +1,28 @@
-"""
-    Doc 2017.09.29
-
-    Create2DRandVol serves to simulate 2D random volumes that shall serve
-    as training and test data.
-
-    ellipses(nmat, nell, seed):
-
-        Fills the volume with random ellipses of nmat different materials
-        and nell ellipses of this material.
-
-"""
 import numpy as np
 from skimage.draw import ellipse
 
 
 class Create2DRandVol:
+    """
+        Doc 2017.09.29
+
+        Create2DRandVol serves to simulate 2D random volumes that shall serve
+        as training and test data.
+
+    """
     def __init__(self, nx, ny):
         self.nx = nx
         self.ny = ny
         self.vol = np.zeros([nx, ny])
 
     def ellipses(self, nmat, nell, seed=None):
+        """
+            Fills the volume with random ellipses of nmat different materials
+            and nell ellipses of this material. A seed can be set to create
+            reproducible results.
+
+        """
+
         self.vol = np.zeros([self.nx, self.ny])
 
         if seed:
