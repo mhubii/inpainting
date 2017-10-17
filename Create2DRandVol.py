@@ -52,21 +52,21 @@ class Create2DRandVol:
 
 if __name__ == '__main__':
     # set some initial parameters
-    nx = 128
-    ny = 128
-    nImg = 1000
+    nx = 256
+    ny = 512
+    nVol = 10
 
     # create random volume of ellipses
     vol = Create2DRandVol(nx, ny)
     data = []
 
-    for _ in range(nImg):
+    for _ in range(nVol):
         nMat = np.random.randint(1, 5)
         nEll = np.random.randint(1, 2)
 
         data.append(vol.ellipses(nMat, nEll))
 
-    data = np.asarray(data).reshape([nImg, nx, ny])
+    data = np.asarray(data).reshape([nVol, nx, ny])
 
     # save data
     np.save('randVol1k', data)
