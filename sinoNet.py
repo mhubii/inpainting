@@ -4,7 +4,7 @@ from keras.models import Sequential
 
 class SinoNet:
     """
-    Doc - 2017.10.17
+    Doc - 2017.10.18
 
         SinoNet may perform the inpainting of a sinogram by using
         a deep convolutional generative adversarial network (DCGAN).
