@@ -1,6 +1,7 @@
 import numpy as np
 import keras
 from keras.models import Sequential
+from keras.layers import Input
 from keras.layers import Dense
 from keras.layers import Reshape
 from keras.layers import Flatten
@@ -49,11 +50,12 @@ class SinoNet:
         self.d.compile(loss='binary_crossentropy', optimizer=Adam())
         self.g.compile(loss='binary_crossentropy', optimizer=Adam())
         self.d_g.compile(loss='binary_crossentropy', optimizer=Adam())
+        self.d_g.summary()
 
-    def train_model(self, epoch=10, batch_size=128):
+    def train_model(self, epochs=30, batch_size=128):
         batch_count = int(self.X_train.shape[0] / batch_size)
 
-        for i in range(epoch):
+        for i in range(epochs):
             for j in tqdm(range(batch_count)):
                 # input for generator
                 noise_input = np.random.rand(batch_size, 100)
@@ -143,6 +145,8 @@ class SinoNet:
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', type=str)
+    parser.add_argument('--epochs', type=int, default=30)
+    parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--path', type=str, default='Data/radonRandVol1kGroundTruth.npy')
     args = parser.parse_args()
     return args
@@ -158,6 +162,6 @@ if __name__ == '__main__':
 
     # train or generate
     if args.mode == 'train':
-        gan.train_model()
+        gan.train_model(epochs=args.epochs, batch_size=args.batch_size)
     elif args.mode == 'generate':
         gan.generate()
