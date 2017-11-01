@@ -10,7 +10,7 @@ from keras.layers import Conv2DTranspose
 from keras.layers.advanced_activations import LeakyReLU
 from keras.optimizers import Adam
 import argparse
-import tqmd
+from tqdm import tqdm
 
 
 class SinoNet:
