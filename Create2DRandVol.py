@@ -55,9 +55,9 @@ class Create2DRandVol:
 
 if __name__ == '__main__':
     # set some initial parameters
-    nx = 512
-    ny = 512
-    nVol = 1
+    nx = 64
+    ny = 64
+    nVol = 1000
 
     # create random volume of ellipses
     vol = Create2DRandVol(nx, ny)
