@@ -10,6 +10,7 @@ from keras.layers import Conv2DTranspose
 from keras.layers.advanced_activations import LeakyReLU
 from keras.optimizers import Adam
 import argparse
+import tqmd
 
 
 class SinoNet:
@@ -53,7 +54,7 @@ class SinoNet:
         batch_count = int(self.X_train.shape[0] / batch_size)
 
         for i in range(epoch):
-            for j in range(batch_count):
+            for j in tqmd(range(batch_count)):
                 # input for generator
                 noise_input = np.random.rand(batch_size, 100)
 
@@ -121,11 +122,11 @@ class SinoNet:
     def discriminator(self):
         model = Sequential()
         model.add(Conv2D(input_shape=(64, 64, 1), filters=128, kernel_size=(5, 5), padding='same', strides=(2, 2)))
-        model.add(LeakyReLU())
+        model.add(LeakyReLU(0.2))
         model.add(Conv2D(filters=256, kernel_size=(5, 5), padding='same', strides=(2, 2)))
-        model.add(LeakyReLU())
+        model.add(LeakyReLU(0.2))
         model.add(Conv2D(filters=512, kernel_size=(5, 5), padding='same', strides=(2, 2)))
-        model.add(LeakyReLU())
+        model.add(LeakyReLU(0.2))
         model.add(Flatten())
         model.add(Dense(units=1, activation='sigmoid'))
 
