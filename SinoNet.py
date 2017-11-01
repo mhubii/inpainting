@@ -75,13 +75,15 @@ class SinoNet:
 
                 # train the discriminator
                 self.d.trainable = True
-                self.d.train_on_batch(X, y_discriminator)
+                d_loss = self.d.train_on_batch(X, y_discriminator)
+                print("Batch %d d_loss: %f" % (epochs, d_loss))
 
                 # train the generator
                 noise_input = np.random.rand(batch_size, 100)
                 y_generator = [1] * batch_size
                 self.d.trainable = False
-                self.d_g.train_on_batch(noise_input, y_generator)
+                g_loss = self.d_g.train_on_batch(noise_input, y_generator)
+                print("Batch %d g_loss: %f" % (epochs, g_loss))
 
         # save results
         self.d.save_weights('TrainedNets/discriminator.h5')
