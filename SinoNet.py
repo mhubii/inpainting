@@ -95,7 +95,7 @@ class SinoNet:
         gen = self.g.predict(try_input)
 
         # save the results
-        np.save(gen, 'Data/genSin')
+        np.save('Data/genSin', gen)
 
     def load_data(self, loc):
         # load the images
