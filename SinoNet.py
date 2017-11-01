@@ -100,7 +100,7 @@ class SinoNet:
     def load_data(self, loc):
         # load the images
         self.X_train = np.load(loc)
-        self.X_train = self.X_train.reshape([10000, 64, 64, 1])
+        self.X_train = self.X_train.reshape([1000, 64, 64, 1])
 
         # scale the range of the image to [-1, 1]
         # because we are using tanh in the last layer of the generator
