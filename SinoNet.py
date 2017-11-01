@@ -54,7 +54,7 @@ class SinoNet:
         batch_count = int(self.X_train.shape[0] / batch_size)
 
         for i in range(epoch):
-            for j in tqmd(range(batch_count)):
+            for j in tqdm(range(batch_count)):
                 # input for generator
                 noise_input = np.random.rand(batch_size, 100)
 
