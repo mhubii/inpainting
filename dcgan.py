@@ -24,11 +24,13 @@ X_train = (X_train - 127.5) / 127.5
 print(X_train.shape)
 
 generator = Sequential([
-        Dense(128*7*7, input_dim=100, activation=LeakyReLU(0.2)),
+        Dense(128*7*7, input_dim=100),
+        LeakyReLU(0.2),
         BatchNormalization(),
         Reshape((7,7,128)),
         UpSampling2D(),
-        Convolution2D(64, 5, 5, border_mode='same', activation=LeakyReLU(0.2)),
+        Convolution2D(64, 5, 5, border_mode='same'),
+        LeakyReLU(0.2),
         BatchNormalization(),
         UpSampling2D(),
         Convolution2D(1, 5, 5, border_mode='same', activation='tanh')
@@ -37,9 +39,11 @@ generator = Sequential([
 generator.summary()
 
 discriminator = Sequential([
-        Convolution2D(64, 5, 5, subsample=(2,2), input_shape=(28,28,1), border_mode='same', activation=LeakyReLU(0.2)),
+        Convolution2D(64, 5, 5, subsample=(2,2), input_shape=(28,28,1), border_mode='same'),
+        LeakyReLU(0.2),
         Dropout(0.3),
-        Convolution2D(128, 5, 5, subsample=(2,2), border_mode='same', activation=LeakyReLU(0.2)),
+        Convolution2D(128, 5, 5, subsample=(2,2), border_mode='same'),
+        LeakyReLU(0.2),
         Dropout(0.3),
         Flatten(),
         Dense(1, activation='sigmoid')
