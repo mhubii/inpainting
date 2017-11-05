@@ -50,7 +50,6 @@ class SinoNet:
         self.d.compile(loss='binary_crossentropy', optimizer=Adam())
         self.g.compile(loss='binary_crossentropy', optimizer=Adam())
         self.d_g.compile(loss='binary_crossentropy', optimizer=Adam())
-        self.d_g.summary()
 
     def train_model(self, epochs=30, batch_size=128):
         batch_count = int(self.X_train.shape[0] / batch_size)
