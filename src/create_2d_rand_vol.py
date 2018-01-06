@@ -5,10 +5,7 @@ import scipy.misc
 
 class Create2DRandVol:
     """
-        Doc 2017.09.29
-
-        Create2DRandVol serves to simulate 2D random volumes that shall serve
-        as training and test data.
+        Create2DRandVol serves to simulate 2D random volumes.
 
     """
     def __init__(self, nx, ny):
@@ -34,15 +31,15 @@ class Create2DRandVol:
 
         for n in range(nmat):
             for _ in range(nell):
-                # center of the ellipse
+                # Center of the ellipse.
                 r = np.random.randint(0, self.nx)
                 c = np.random.randint(0, self.ny)
 
-                # minor and major semi-axis
+                # Minor and major semi-axis.
                 r_rad = np.random.randint(1, int(self.nx*0.5))
                 c_rad = np.random.randint(1, int(self.ny*0.5))
 
-                # rotation
+                # Rotation.
                 rot = np.random.rand()*2*np.pi
 
                 rr, cc = ellipse(r=r, c=c, r_radius=r_rad, c_radius=c_rad,
@@ -54,12 +51,12 @@ class Create2DRandVol:
 
 
 if __name__ == '__main__':
-    # set some initial parameters
+    # Set some initial parameters.
     nx = 64
     ny = 64
     nVol = 1000
 
-    # create random volume of ellipses
+    # Create random volume of ellipses.
     vol = Create2DRandVol(nx, ny)
     data = []
 
@@ -71,7 +68,7 @@ if __name__ == '__main__':
 
     data = np.asarray(data).reshape([nVol, nx, ny])
 
-    # save data
-    np.save('Data/randVol1k', data)
-    scipy.misc.imsave('Images/randEll.png', data[0])
+    # Save data.
+    np.save('../data/rand_vol_1k', data)
+    scipy.misc.imsave('../img/rand_ell.png', data[0])
 
