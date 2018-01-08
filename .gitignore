@@ -3,3 +3,6 @@ data
 
 ### Pycharm ###
 *__pycache__
+
+### Jupyter Notebook ###
+*.ipynb

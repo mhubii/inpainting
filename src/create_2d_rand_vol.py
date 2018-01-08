@@ -1,6 +1,8 @@
 import numpy as np
 from skimage.draw import ellipse
 import scipy.misc
+import argparse
+import utils
 
 
 class Create2DRandVol:
@@ -8,6 +10,7 @@ class Create2DRandVol:
         Create2DRandVol serves to simulate 2D random volumes.
 
     """
+
     def __init__(self, nx, ny):
         self.nx = nx
         self.ny = ny
@@ -52,23 +55,22 @@ class Create2DRandVol:
 
 if __name__ == '__main__':
     # Set some initial parameters.
-    nx = 64
-    ny = 64
-    nVol = 1000
+    parser = argparse.ArgumentParser(description='Creates random 2d volume.')
+    parser.add_argument('-n_mat', type=int, default=5,
+                        help='Number of randomly initialized materials (default = 5).')
+    parser.add_argument('-n_ell', type=int, default=3,
+                        help='Number of randomly initialized ellipses of one material (default = 3).')
+
+    args = parser.parse_args()
 
     # Create random volume of ellipses.
-    vol = Create2DRandVol(nx, ny)
-    data = []
+    vol = Create2DRandVol(utils.N_X, utils.N_Y)
+    data = np.empty([utils.N_VOL, utils.N_X, utils.N_Y])
 
-    for _ in range(nVol):
-        nMat = np.random.randint(1, 5)
-        nEll = np.random.randint(1, 2)
-
-        data.append(vol.ellipses(nMat, nEll))
-
-    data = np.asarray(data).reshape([nVol, nx, ny])
+    for n in range(utils.N_VOL):
+        data[n] = vol.ellipses(args.n_mat, args.n_ell)
 
     # Save data.
-    np.save('../data/rand_vol_1k', data)
+    np.save('../data/rand_vol_{}'.format(utils.N_VOL), data)
     scipy.misc.imsave('../img/rand_ell.png', data[0])
 
