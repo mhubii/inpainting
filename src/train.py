@@ -4,26 +4,25 @@ import torch
 import torch.nn as nn
 import torch.optim
 from torch.autograd import Variable
-from tqdm import tqdm
 import utils
 
 
-def train(epoch):
-    for data in tqdm(data_loader):
-        data = Variable(data.float())
+def train():
+    for data in data_loader:
+        data = Variable(data.float().cuda())
         data = torch.unsqueeze(data, 1)
 
         # Train discriminator with fake and real data.
         model.generator.eval()
         model.discriminator.train()
 
-        label_real = Variable(torch.ones(args.batch_size))
-        label_fake = Variable(torch.zeros(args.batch_size))
+        label_real = Variable(torch.ones(args.batch_size).cuda())
+        label_fake = Variable(torch.zeros(args.batch_size).cuda())
 
         optimizer_dis.zero_grad()
 
         output_dis_real = model.forward_discriminator(data)
-        rand_input = Variable(torch.rand(args.batch_size, 100))
+        rand_input = Variable(torch.rand(args.batch_size, 100).cuda())
         output_dis_fake = model.forward(rand_input)
 
         loss_dis_real = criterion(output_dis_real, label_real)
@@ -38,7 +37,7 @@ def train(epoch):
         model.discriminator.eval()
 
         optimizer_gen.zero_grad()
-        rand_input = Variable(torch.rand(args.batch_size, 100))
+        rand_input = Variable(torch.rand(args.batch_size, 100).cuda())
         output_gen = model.forward_generator(rand_input)
         loss_gen = criterion(output_gen, data)
         loss_gen.backward()
@@ -58,7 +57,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Load model and initialize weights.
-    model = DCGAN()
+    model = DCGAN().cuda()
     model.apply(utils.weight_init)
 
     # Set up data loader.
@@ -72,4 +71,8 @@ if __name__ == '__main__':
     criterion = nn.MSELoss()
 
     # Train.
-    train(args.epochs)
+    for epoch in range(args.epochs):
+        train()
+
+    # Save results.
+    torch.save(model.state_dict(), 'model_dcgan.pth')
