@@ -29,7 +29,7 @@ def slice_array(arr,
 
 if __name__ == '__main__':
     # Load data.
-    data = np.load('../data/rand_vol_{}.npy'.format(utils.N_VOL))
+    data = np.load('../data/rand_vol_{}_test.npy'.format(utils.N_VOL))
     data.reshape([utils.N_VOL, utils.N_X, utils.N_Y])
 
     # Perform the radon transformation.
@@ -48,9 +48,9 @@ if __name__ == '__main__':
         sliced_data = slice_array(data[n], utils.IMAGE_HEIGHT, utils.IMAGE_WIDTH)
 
         for idx, slice in enumerate(sliced_data):
-            scipy.misc.imsave('../data/radon_transform_snippets/radon_n_vol_{}_idx_{}.jpg'.format(n, idx), slice)
-            loc.append([os.path.abspath(os.path.join(os.getcwd(), '../data/radon_transform_snippets/radon_n_vol_{}_idx_{}.jpg'.format(n, idx)))])
+            scipy.misc.imsave('../data/radon_transform_snippets_test/radon_n_vol_{}_idx_{}.jpg'.format(n, idx), slice)
+            loc.append([os.path.abspath(os.path.join(os.getcwd(), '../data/radon_transform_snippets_test/radon_n_vol_{}_idx_{}.jpg'.format(n, idx)))])
 
-    with open('../data/locations', 'w') as my_file:
+    with open('../data/locations_test', 'w') as my_file:
         wr = csv.writer(my_file)
         wr.writerows(loc)

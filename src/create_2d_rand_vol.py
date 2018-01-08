@@ -71,6 +71,6 @@ if __name__ == '__main__':
         data[n] = vol.ellipses(args.n_mat, args.n_ell)
 
     # Save data.
-    np.save('../data/rand_vol_{}'.format(utils.N_VOL), data)
+    np.save('../data/rand_vol_{}_test'.format(utils.N_VOL), data)
     scipy.misc.imsave('../img/rand_ell.png', data[0])
 

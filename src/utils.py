@@ -6,7 +6,7 @@ import torch.nn as nn
 # Generally used parameters.
 N_X = 1024
 N_Y = 1024
-N_VOL = 1
+N_VOL = 10
 
 A = 360
 N_A = 1024
