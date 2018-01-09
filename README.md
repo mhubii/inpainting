@@ -23,15 +23,17 @@ In order to reduce the radiation, a patient has to undergo, one can simply reduc
 
 ![Radon Transform with less Projections](img/rand_ell_rad_less_dose.png)
 
-To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions.
+To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions. Please note that the masked regions of the radon transform can be barely seen on a computer screen due to aliasing.
 
 ## Methods
+As proposed in [2], a DCGAN can be used for inpainting purposes. Since this technique works  well for small image sizes but doesnt for highly resolved images, as in our case, we simply train the algorithm on small image snippets.
 
+## Results
 
 
 ## Literature
 [1] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
 
-[Semantic Image Inpainting with Deep Generative Models](https://arxiv.org/abs/1607.07539 "Link to arXiv")
+[2] [Semantic Image Inpainting with Deep Generative Models](https://arxiv.org/abs/1607.07539 "Link to arXiv")
 
-[Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434 "Link to arXiv")
+[3] [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434 "Link to arXiv")
