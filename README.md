@@ -8,20 +8,20 @@ Our goal is to perform an inpainting for computer tomographic (CT) images to red
 
 Radon transforms are images as one obtains them from CT scans before the reconstruction. The image below shows a reconstructed section in the axial plane of a patient. [1]
 
-<img src="img/real_ct.png" width="50%" height="50%">
+<center><img src="img/real_ct.png" width="50%" height="50%"></center>
 
 Before the reconstruction an image rather has the shape of many stacked sine functions. This typical appearance, as seen below, results from the detector and the x-ray source which rotate around the patient. 
 
-<img src="img/rand_ell_rad.png" width="50%" height="50%">
+<center><img src="img/rand_ell_rad.png" width="50%" height="50%"></center>
 
 The shown radon transform is the result of transforming a simulated section through randomly created ellipses (see below). For a proof of concept we stick to these simulated sections before applying the algorithm to real patient data.
 
-<img src="img/rand_ell.png" width="50%" height="50%">
+<center><img src="img/rand_ell.png" width="50%" height="50%"></center>
 
 ### Dose Reduction
 In order to reduce the radiation, a patient has to undergo, one can simply reduce the number of projections. An example of a radon transform with a reduced number of projections is shown below.
 
-<img src="img/rand_ell_rad_less_dose.png" width="50%" height="50%">
+<center><img src="img/rand_ell_rad_less_dose.png" width="50%" height="50%"></center>
 
 To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions. Please note that the masked regions of the radon transform can be barely seen on a computer screen due to aliasing.
 
