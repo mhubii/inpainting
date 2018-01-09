@@ -18,10 +18,19 @@ The shown radon transform is the result of transforming a simulated section thro
 
 ![Random Ellipses](img/rand_ell.png)
 
+### Dose Reduction
+In order to reduce the radiation, a patient has to undergo, one can simply reduce the number of projections. An example of a radon transform with a reduced number of projections is shown below.
+
+[Radon Transform with less Projections](img/rand_ell_rad_less_dose.png)
+
+To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions.
+
 ## Methods
 
+
+
 ## Literature
-[1][Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
+[1] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
 
 [Semantic Image Inpainting with Deep Generative Models](https://arxiv.org/abs/1607.07539 "Link to arXiv")
 
