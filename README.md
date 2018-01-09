@@ -12,16 +12,16 @@ Radon transforms are images as one obtains them from CT scans before the reconst
 
 Before the reconstruction an image rather has the shape of many stacked sine functions. This typical appearance, as seen below, results from the detector and the x-ray source which rotate around the patient. 
 
-![Radon Transform](img/rand_ell_rad.png)
+<img src="img/rand_ell_rad.png" width="50%" height="50%">
 
 The shown radon transform is the result of transforming a simulated section through randomly created ellipses (see below). For a proof of concept we stick to these simulated sections before applying the algorithm to real patient data.
 
-![Random Ellipses](img/rand_ell.png)
+<img src="img/rand_ell.png" width="50%" height="50%">
 
 ### Dose Reduction
 In order to reduce the radiation, a patient has to undergo, one can simply reduce the number of projections. An example of a radon transform with a reduced number of projections is shown below.
 
-![Radon Transform with less Projections](img/rand_ell_rad_less_dose.png)
+<img src="img/rand_ell_rad_less_dose.png" width="50%" height="50%">
 
 To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions. Please note that the masked regions of the radon transform can be barely seen on a computer screen due to aliasing.
 
