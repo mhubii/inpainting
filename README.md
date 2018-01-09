@@ -8,7 +8,7 @@ Our goal is to perform an inpainting for computer tomographic (CT) images to red
 
 Radon transforms are images as one obtains them from CT scans before the reconstruction. The image below shows a reconstructed section in the axial plane of a patient. [1]
 
-<img align="center" src="img/real_ct.png" width="50%" height="50%">
+<p align="center"><img src="img/real_ct.png" width="50%" height="50%"></p>
 
 Before the reconstruction an image rather has the shape of many stacked sine functions. This typical appearance, as seen below, results from the detector and the x-ray source which rotate around the patient. 
 
