@@ -1,12 +1,12 @@
 # inpainting
 
-Goal of inpainting is to complete **sinograms** (radon transforms) as acquired from **computer tomographic** (CT) imaging using a **deep convolutional adversarial neural net** (DCGAN). The desired sinograms need to be completed since we aim at reducing the number of projections and therefore to effectively reduce the dose from x-rays that a patient would be exposed to. The images show sinograms of ellipses at many (left) and less (right) projections.
+## Introduction
+
+Our goal is to perform an inpainting for computer tomographic images to reduce the dose a patient has to undergo during the examination. We take advantage of recent developments in the architecture of neural nets and utilize so called deep convolutional generative adversarial neural nets.
 
 ![Simulated Volume of Random Ellipses](images/randEllRadEx.png)
 ![Simulated Volume of Random Ellipses](images/randEllRedRadEx.png)
 
-The concept needs to be proven before applying it to clinical data. Therefore, a simple application **Create2DRandVol.py** simulates a 2D volume of randomly generated ellipses to create training data.
-
-![Simulated Volume of Random Ellipses](images/randEllEx.png)
-
-Once the data is acquired, may it be clinical or simulated, it is fed into **SinoNet.py**, which holds the implementation of the DCGAN and may complete the incomplete data.
+## Literature
+[Semantic Image Inpainting with Deep Generative Models](https://arxiv.org/abs/1607.07539 "Link to arXiv")
+[Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434 "Link to arXiv")
