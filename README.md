@@ -21,7 +21,7 @@ The shown radon transform is the result of transforming a simulated section thro
 ### Dose Reduction
 In order to reduce the radiation, a patient has to undergo, one can simply reduce the number of projections. An example of a radon transform with a reduced number of projections is shown below.
 
-[Radon Transform with less Projections](img/rand_ell_rad_less_dose.png)
+![Radon Transform with less Projections](img/rand_ell_rad_less_dose.png)
 
 To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions.
 
