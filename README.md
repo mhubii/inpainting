@@ -32,7 +32,7 @@ As proposed in [2], a DCGAN can be used for inpainting purposes. Since this tech
 
 
 ## Literature
-[<a href="#1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
+[<a name="#1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
 
 [2] [Semantic Image Inpainting with Deep Generative Models](https://arxiv.org/abs/1607.07539 "Link to arXiv")
 
