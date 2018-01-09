@@ -6,7 +6,7 @@ Our goal is to perform an inpainting for computer tomographic (CT) images to red
 
 ### Radon Transforms
 
-Radon transforms are images as one obtains them from CT scans before the reconstruction. The image below shows a reconstructed section in the axial plane of a patient. [1]
+Radon transforms are images as one obtains them from CT scans before the reconstruction. The image below shows a reconstructed section in the axial plane of a patient. [<a href="#1>1</a>]
 
 <p align="center"><img src="img/real_ct.png" width="50%" height="50%"></p>
 
@@ -32,7 +32,7 @@ As proposed in [2], a DCGAN can be used for inpainting purposes. Since this tech
 
 
 ## Literature
-[1] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
+[<a href="#1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
 
 [2] [Semantic Image Inpainting with Deep Generative Models](https://arxiv.org/abs/1607.07539 "Link to arXiv")
 
