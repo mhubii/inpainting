@@ -6,7 +6,7 @@ Our goal is to perform an inpainting for computer tomographic (CT) images to red
 
 ### Radon Transforms
 
-Radon transforms are images as one obtains them from CT scans before the reconstruction. The image below shows a reconstructed section in the axial plane of a patient. [<a href="#1>1</a>]
+Radon transforms are images as one obtains them from CT scans before the reconstruction. The image below shows a reconstructed section in the axial plane of a patient. [<a href="#1">1</a>]
 
 <p align="center"><img src="img/real_ct.png" width="50%" height="50%"></p>
 
