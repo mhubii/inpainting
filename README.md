@@ -12,14 +12,19 @@ Radon transforms are images as one obtains them from CT scans before the reconst
   <p align="center"><img src="img/real_ct.png" width="20%" height="20%"></p>
   <figcpation>Fig. 1: Reconstructed CT Scan of a Liver. [<a href="#1">1</a>]</figcaption>
 </figure>
-<br>
+
+
+
+
+
+
 Before the reconstruction, an image rather has the shape of many stacked sine functions. This typical appearance, as seen below, results from the detector and the x-ray source which rotate around the patient. 
 
 <figure>
   <p align="center"><img src="img/rand_ell.png" width="20%" height="20%" hspace="20"><img src="img/rand_ell_rad.png"      width="20%" height="20%" hspace="20"></p>
   <figcaption>Fig. 2: (Left) Section through randomly simulated ellipses. (Right) radon transform of these ellipses.</figcaption>
 </figure>
-<br>
+
 The shown radon transform is the result of transforming a simulated section through randomly created ellipses. For a proof of concept we stick to these simulated sections before applying the algorithm to real patient data.
 
 ### Dose Reduction
