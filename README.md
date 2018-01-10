@@ -12,6 +12,7 @@ Radon transforms are images as one obtains them from CT scans before the reconst
   <p align="center"><img src="img/real_ct.png" width="20%" height="20%"></p>
   <figcpation>Fig. 1: Reconstructed CT Scan of a Liver. [<a href="#1">1</a>]</figcaption>
 </figure>
+<br><br>
 
 Before the reconstruction, an image rather has the shape of many stacked sine functions. This typical appearance, as seen below, results from the detector and the x-ray source which rotate around the patient. 
 
@@ -19,6 +20,7 @@ Before the reconstruction, an image rather has the shape of many stacked sine fu
   <p align="center"><img src="img/rand_ell.png" width="20%" height="20%" hspace="20"><img src="img/rand_ell_rad.png"      width="20%" height="20%" hspace="20"></p>
   <figcaption>Fig. 2: (Left) Section through randomly simulated ellipses. (Right) radon transform of these ellipses.</figcaption>
 </figure>
+<br><br>
 
 The shown radon transform is the result of transforming a simulated section through randomly created ellipses. For a proof of concept we stick to these simulated sections before applying the algorithm to real patient data.
 
@@ -29,7 +31,8 @@ In order to reduce the radiation, a patient has to undergo, one can simply reduc
   <p align="center"><img src="img/rand_ell_rad_less_dose.png" width="20%" height="20%"></p>
   <figcaption>Fig. 3: Radon transform with less projections.</figcaption>
 </figure>
-<br><br><br>
+<br><br>
+
 To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions. Please note that the masked regions of the radon transform can be barely seen on a computer screen due to aliasing.
 
 ## Methods
@@ -42,6 +45,7 @@ The DCGAN produces radon transform snippets that can be hardly distinguished fro
   <p align="center"><img src="img/real_snippet.png" width="30%" height="30%"><img src="img/snippet_at_epoch_20.png" width="30%" height="30%"><img src="img/epochs.gif" width="30%" height="30%"></p>
   <figcaption>Fig. 4: (Left) Snippets of size 64x64 of a radon transform. (Center) Radon transform snippets as created by the generator of the DCGAN. (Right) Evolution of the generator.</figcaption>
 </figure>
+<br><br>
 
 We trained the net for 20 epochs.
 
