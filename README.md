@@ -13,11 +13,6 @@ Radon transforms are images as one obtains them from CT scans before the reconst
   <figcpation>Fig. 1: Reconstructed CT Scan of a Liver. [<a href="#1">1</a>]</figcaption>
 </figure>
 
-
-
-
-
-
 Before the reconstruction, an image rather has the shape of many stacked sine functions. This typical appearance, as seen below, results from the detector and the x-ray source which rotate around the patient. 
 
 <figure>
@@ -30,7 +25,10 @@ The shown radon transform is the result of transforming a simulated section thro
 ### Dose Reduction
 In order to reduce the radiation, a patient has to undergo, one can simply reduce the number of projections. An example of a radon transform with a reduced number of projections is shown below.
 
-<p align="center"><img src="img/rand_ell_rad_less_dose.png" width="20%" height="20%"></p>
+<figure>
+  <p align="center"><img src="img/rand_ell_rad_less_dose.png" width="20%" height="20%"></p>
+  <figcaption>Fig. 3: Radon transform with less projections.</figcaption>
+</figure>
 
 To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions. Please note that the masked regions of the radon transform can be barely seen on a computer screen due to aliasing.
 
