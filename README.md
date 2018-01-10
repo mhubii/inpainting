@@ -10,8 +10,7 @@ Radon transforms are images as one obtains them from CT scans before the reconst
 
 <figure>
   <p align="center">
-    <img src="img/real_ct.png" width="20%" height="20%">
-    <figcpation>Fig. 1: Reconstructed CT Scan of a Liver. [<a href="#1">1</a>]</figcaption>
+    <img src="img/real_ct.png" width="20%" height="20%"><figcpation>Fig. 1: Reconstructed CT Scan of a Liver. [<a href="#1">1</a>]</figcaption>
   </p>
 </figure>
 
