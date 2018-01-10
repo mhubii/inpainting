@@ -8,20 +8,20 @@ Our goal is to perform an inpainting for computer tomographic (CT) images to red
 
 Radon transforms are images as one obtains them from CT scans before the reconstruction. The image below shows a reconstructed section in the axial plane of a patient. [<a href="#1">1</a>]
 
-<p align="center"><img src="img/real_ct.png" width="50%" height="50%"></p>
+<p align="center"><img src="img/real_ct.png" width="40%" height="40%"></p>
 
 Before the reconstruction an image rather has the shape of many stacked sine functions. This typical appearance, as seen below, results from the detector and the x-ray source which rotate around the patient. 
 
-<p align="center"><img src="img/rand_ell_rad.png" width="50%" height="50%"></p>
+<p align="center"><img src="img/rand_ell_rad.png" width="40%" height="40%"></p>
 
 The shown radon transform is the result of transforming a simulated section through randomly created ellipses (see below). For a proof of concept we stick to these simulated sections before applying the algorithm to real patient data.
 
-<p align="center"><img src="img/rand_ell.png" width="50%" height="50%"></p>
+<p align="center"><img src="img/rand_ell.png" width="40%" height="40%"></p>
 
 ### Dose Reduction
 In order to reduce the radiation, a patient has to undergo, one can simply reduce the number of projections. An example of a radon transform with a reduced number of projections is shown below.
 
-<p align="center"><img src="img/rand_ell_rad_less_dose.png" width="50%" height="50%"></p>
+<p align="center"><img src="img/rand_ell_rad_less_dose.png" width="40%" height="40%"></p>
 
 To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions. Please note that the masked regions of the radon transform can be barely seen on a computer screen due to aliasing.
 
@@ -31,11 +31,11 @@ As proposed in [<a href="#2">2</a>], a DCGAN can be used for inpainting purposes
 ## Results
 The DCGAN produces radon transform snippets that can be hardly distinguished from real radon transform snippets as shown below.
 
-<img src="img/real_snippet.png" width="50%" height="50%"><img src="img/snippet_at_epoch_20.png" width="50%" height="50%">
+<img src="img/real_snippet.png" width="60%" height="60%"><img src="img/snippet_at_epoch_20.png" width="60%" height="60%">
 
 We trained the net for 20 epochs.
 
-<p align="center"><img src="img/epochs.gif" width="50%" height="50%"></p>
+<p align="center"><img src="img/epochs.gif" width="60%" height="60%"></p>
 
 
 ## Literature
