@@ -6,15 +6,18 @@ Our goal is to perform an inpainting for computer tomographic (CT) images to red
 
 ### Radon Transforms
 
-Radon transforms are images as one obtains them from CT scans before the reconstruction. The image below shows a reconstructed section in the axial plane of a patient. [<a href="#1">1</a>]
+Radon transforms are images as one obtains them from CT scans before the reconstruction. Figure 1 shows a reconstructed section in the axial plane of a patient. [<a href="#1">1</a>]
 
-<p align="center"><img src="img/real_ct.png" width="20%" height="20%"></p>
+<figure>
+  <p align="center"><img src="img/real_ct.png" width="20%" height="20%"></p>
+  <figcpation>Fig. 1: Reconstructed CT Scan of a Liver.</figcaption>
+</figure>
 
 Before the reconstruction, an image rather has the shape of many stacked sine functions. This typical appearance, as seen below, results from the detector and the x-ray source which rotate around the patient. 
 
 <p align="center"><img src="img/rand_ell.png" width="20%" height="20%" hspace="20"><img src="img/rand_ell_rad.png" width="20%" height="20%" hspace="20"></p>
 
-The shown radon transform (left) is the result of transforming a simulated section through randomly created ellipses (right). For a proof of concept we stick to these simulated sections before applying the algorithm to real patient data.
+The shown radon transform (right) is the result of transforming a simulated section through randomly created ellipses (left). For a proof of concept we stick to these simulated sections before applying the algorithm to real patient data.
 
 ### Dose Reduction
 In order to reduce the radiation, a patient has to undergo, one can simply reduce the number of projections. An example of a radon transform with a reduced number of projections is shown below.
