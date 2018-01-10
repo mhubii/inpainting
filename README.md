@@ -26,9 +26,16 @@ In order to reduce the radiation, a patient has to undergo, one can simply reduc
 To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions. Please note that the masked regions of the radon transform can be barely seen on a computer screen due to aliasing.
 
 ## Methods
-As proposed in [<a href="#2"2</a>], a DCGAN can be used for inpainting purposes. Since this technique works  well for small image sizes but doesnt for highly resolved images, as in our case, we simply train the algorithm on small image snippets.
+As proposed in [<a href="#2">2</a>], a DCGAN can be used for inpainting purposes. Since this technique works  well for small image sizes but doesnt for highly resolved images, as in our case, we simply train the algorithm on small image snippets.
 
 ## Results
+The DCGAN produces radon transform snippets that can be hardly distinguished from real radon transform snippets as shown below.
+
+<img align="left" src="img/real_snippet.png"><img align="right src="img/snippet_at_epoch_20.png">
+
+We trained the net for 20 epochs.
+
+<p align="center"><img src="img/epochs.gif" width="50%" height="50%"></p>
 
 
 ## Literature
