@@ -10,7 +10,7 @@ Radon transforms are images as one obtains them from CT scans before the reconst
 
 <figure>
   <p align="center"><img src="img/real_ct.png" width="20%" height="20%"></p>
-  <figcpation>Fig. 1: Reconstructed CT Scan of a Liver.</figcaption>
+  <figcpation align="center">Fig. 1: Reconstructed CT Scan of a Liver.</figcaption>
 </figure>
 
 Before the reconstruction, an image rather has the shape of many stacked sine functions. This typical appearance, as seen below, results from the detector and the x-ray source which rotate around the patient. 
