@@ -31,7 +31,7 @@ As proposed in [<a href="#2">2</a>], a DCGAN can be used for inpainting purposes
 ## Results
 The DCGAN produces radon transform snippets that can be hardly distinguished from real radon transform snippets as shown below.
 
-<img src="img/real_snippet.png" style="float: left; width: 30%;"><img src="img/snippet_at_epoch_20.png" style="float: left; width: 30%;"><p style="clear: both;">
+<p><img src="img/real_snippet.png" style="float: left; width: 30%;"><img src="img/snippet_at_epoch_20.png" style="float: left; width: 30%;"></p><p style="clear: both;">
 
 We trained the net for 20 epochs.
 
