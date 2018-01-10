@@ -19,7 +19,7 @@ Before the reconstruction, an image rather has the shape of many stacked sine fu
 
 <br>
 <figure>
-  <p align="center"><img src="img/rand_ell.png" width="20%" height="20%" hspace="20"><img src="img/rand_ell_rad.png"      width="20%" height="20%" hspace="20"></p>
+  <p align="center"><img src="img/rand_ell.png" width="20%" height="20%" hspace="40"><img src="img/rand_ell_rad.png"      width="20%" height="20%" hspace="20"></p>
   <figcaption>Fig. 2: (Left) Section through randomly simulated ellipses. (Right) Radon transform of these ellipses.</figcaption>
 </figure>
 <br><br>
