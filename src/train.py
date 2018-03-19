@@ -86,17 +86,6 @@ if __name__ == '__main__':
                                               shuffle=True,
                                               num_workers=args.num_workers,
                                               drop_last=True)
-    """
-    img_size = 63
-    transform = transforms.Compose([
-        transforms.Resize(img_size),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5))
-    ])
-    data_loader = torch.utils.data.DataLoader(
-        datasets.MNIST('../data', train=True, download=True, transform=transform),
-        batch_size=args.batch_size, shuffle=True, drop_last=True)
-    """
 
     # Optimizer and loss.
     optimizer_gen = torch.optim.Adam(gen.parameters(), lr=0.0002, betas=(0.5, 0.999))
@@ -108,5 +97,5 @@ if __name__ == '__main__':
         train()
 
         # Save checkpoints.
-        torch.save(gen.state_dict(), '../state_dict/gen_epoch_{}.pth'.format(epoch))
-        torch.save(dis.state_dict(), '../state_dict/dis_epoch_{}.pth'.format(epoch))
+        torch.save(gen.state_dict(), '../state_dict/gen_epoch_{}.pth'.format(epoch + 1))
+        torch.save(dis.state_dict(), '../state_dict/dis_epoch_{}.pth'.format(epoch + 1))

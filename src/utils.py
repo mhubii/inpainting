@@ -1,13 +1,14 @@
-from torch.utils.data import Dataset
 import numpy as np
 import scipy.misc
 import csv
+import torch
 import torch.nn as nn
+from torch.utils.data import Dataset
 
 # Generally used parameters.
 N_X = 1024
 N_Y = 1024
-N_VOL = 10
+N_VOL = 1
 
 A = 360
 N_A = 1024
@@ -44,3 +45,84 @@ class RadonSnippets(Dataset):
 
     def __len__(self):
         return len(self.csv_loc)
+
+
+# Create a mask.
+def create_mask(n):
+    """
+        Sets every every nth column of the mask to be
+        one and return it.
+
+    """
+    mask = np.zeros([N_X, N_A])
+    mask[:, ::n] = 1
+
+    return mask
+
+
+# Losses.
+L1 = nn.L1Loss().cuda()
+BCE = nn.BCELoss().cuda()
+
+
+# Prior loss.
+def prior_loss(inp, tar):
+    loss = BCE(inp, tar)
+
+    return loss
+
+
+# Context loss.
+def context_loss(inp, tar, mask):
+    inp = torch.mul(inp, mask)
+    loss = L1(inp, tar)
+
+    return loss
+
+
+# Slice array.
+def slice_array(arr,
+                n_rows, n_cols,
+                stride):
+    """
+        Slices an array into multiple sub-arrays of size
+        n_rows x n_cols and returns them as a list.
+
+    """
+
+    sliced_arr = list()
+
+    # Determine how many sub-arrays can be obtained.
+    n_row_slice = int(arr.shape[0]/stride[0])
+    n_col_slice = int(arr.shape[1]/stride[1])
+
+    for i in range(n_row_slice):
+        for j in range(n_col_slice):
+            if arr[i*stride[0]:i*stride[0] + n_rows,
+                   j*stride[1]:j*stride[1] + n_cols].shape == (n_rows, n_cols):
+                sliced_arr.append(arr[i*stride[0]:i*stride[0] + n_rows,
+                                      j*stride[1]:j*stride[1] + n_cols])
+
+    return sliced_arr, n_row_slice, n_col_slice
+
+
+# Stick together.
+def stick_together(sliced_arr, n_row_slice, n_col_slice,
+                   stride):
+    """
+        Sticks sliced_arr together to return a full
+        image.
+
+    """
+
+    n_rows, n_cols = sliced_arr[0, 0].shape
+
+    arr = np.zeros([n_row_slice*stride[0] + n_rows - stride[0],
+                    n_col_slice*stride[1] + n_cols - stride[1]])
+
+    for i in range(n_row_slice):
+        for j in range(n_col_slice):
+            arr[i*stride[0]:i*stride[0] + n_rows,
+                j*stride[1]:j*stride[1] + n_cols] = sliced_arr[i*n_col_slice + j]
+
+    return arr
