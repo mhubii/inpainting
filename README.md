@@ -51,6 +51,18 @@ The DCGAN produces radon transform snippets that can be hardly distinguished fro
 </figure>
 <br><br>
 
+When the inpainting is applied on overlaying snippets of the radon transform, the resulting images do neither capture global structures nor local structures, as can be seen in figure 5. The quality of the inpainting does not change at higher number of projections or equally more dose.
+
+<br>
+<figure>
+  <p align="center"><img src="img/original.png" width="20%" height="20%" hspace="40"><img src="img/optimal.png"      width="20%" height="20%" hspace="40"></p>
+  <figcaption>Fig. 2: (Left) Radon transform of randomly simulated ellipses. (Right) Inpainted radon transform with 88% less dose of randomly simulated ellipses. </figcaption>
+</figure>
+<br><br>
+
+## Conclusion
+The presented method, as it is, does not work well to perform inpaintings on radon transformations. Other techniques have to be investigated or the inpainting based on a DCGAN has to be further developed. 
+
 ## Literature
 [<a name="1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
 
