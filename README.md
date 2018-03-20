@@ -61,7 +61,7 @@ When the inpainting is applied on overlaying snippets of the radon transform, th
 <br><br>
 
 ## Conclusion
-The presented method, as it is, does not work well to perform inpaintings on radon transformations. Other techniques have to be investigated or the inpainting based on a DCGAN has to be further developed. 
+The presented method, as it is, does not work well to perform inpaintings on radon transformations. Other techniques have to be investigated or the inpainting based on a DCGAN has to be further developed for this kind of application. 
 
 ## Literature
 [<a name="1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
