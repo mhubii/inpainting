@@ -64,7 +64,7 @@ The reconstructed images (fig. 6) reveal that the inpainted radon transform resu
 
 <br>
 <figure>
-  <p align="center"><img src="img/original_reco.png" width="20%" height="20%" hspace="40"><img src="img/masked_reco.png" width="20%" height="20%" hspace="40"><img src="img/optimal_reco.png" width="20%" height="20%" hspace="40"></p>
+  <p align="center"><img src="img/reco_original.png" width="20%" height="20%" hspace="40"><img src="img/reco_masked.png" width="20%" height="20%" hspace="40"><img src="img/reco_optimal.png" width="20%" height="20%" hspace="40"></p>
   <figcaption>Fig. 6: (Left) Reconstruction of original radon transform. (Center) Reconstruction with less projections. (Right) Reconstruction using the inpainted radon transform. </figcaption>
 </figure>
 <br><br>
