@@ -55,8 +55,8 @@ When the inpainting is applied on overlaying snippets of the radon transform, th
 
 <br>
 <figure>
-  <p align="center"><img src="img/original.png" width="20%" height="20%" hspace="40"><img src="img/optimal.png"      width="20%" height="20%" hspace="40"></p>
-  <figcaption>Fig. 5: (Left) Radon transform of randomly simulated ellipses. (Right) Inpainted radon transform with 75% less dose. </figcaption>
+  <p align="center"><img src="img/original.png" width="20%" height="20%" hspace="40"><img src="img/masked.png" width="20%" height="20%" hspace="40"><img src="img/optimal.png" width="20%" height="20%" hspace="40"></p>
+  <figcaption>Fig. 5: (Left) Radon transform of randomly simulated ellipses, using 100% dose. (Center) Radon transform using only 25% dose. (Right) Inpainted radon transform. </figcaption>
 </figure>
 <br><br>
 
