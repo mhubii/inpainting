@@ -60,7 +60,7 @@ When the inpainting is applied on overlaying snippets of the radon transform, th
 </figure>
 <br><br>
 
-The reconstructed images (fig. 6) reveal that the inpainted radon transform results in blurry images and the miss of global consistency produces some ring artifacts.
+The reconstructed images (Figure 6) reveal that the inpainted radon transform results in blurry images and the missing of global consistency produces some ring artifacts.
 
 <br>
 <figure>
