@@ -5,19 +5,54 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset
 
+
 # Generally used parameters.
-N_X = 1024
-N_Y = 1024
-N_VOL = 1
+N_X = 256
+N_Y = 256
+N_VOL = 10000
 
 A = 360
-N_A = 1024
+N_A = 360
 
 IMAGE_HEIGHT = 63
 IMAGE_WIDTH = 63
 
 
-# Data set to get samples.
+# Data set to get radon transform samples.
+class RadonTransforms(Dataset):
+    """
+        Data set generator to obtain radon transformations.
+
+    """
+
+    def __init__(self, csv_loc, mask_loc, transform=None):
+        self.csv_loc = list()
+        self.mask = scipy.misc.imread(mask_loc)
+        self.mask = np.expand_dims(self.mask, 2)
+
+        self.transform = transform
+
+        with open(csv_loc, 'r') as my_file:
+            reader = csv.reader(my_file)
+            self.csv_loc = list(reader)
+
+    def __getitem__(self, index):
+        loc = self.csv_loc[index][0]
+        radon_transform = scipy.misc.imread(loc)
+        radon_transform = np.expand_dims(radon_transform, 2)
+
+        sample = np.concatenate((radon_transform, self.mask), 2)
+
+        if self.transform is not None:
+            sample = self.transform(sample)
+
+        return sample
+
+    def __len__(self):
+        return len(self.csv_loc)
+
+
+# Data set to get radon snippet samples.
 class RadonSnippets(Dataset):
     """
         Data set generator to obtain snippets of
@@ -126,3 +161,8 @@ def stick_together(sliced_arr, n_row_slice, n_col_slice,
                 j*stride[1]:j*stride[1] + n_cols] = sliced_arr[i*n_col_slice + j]
 
     return arr
+
+
+if __name__ == '__main__':
+    mask = create_mask(2)
+    scipy.misc.imsave('../data/mask.jpg', mask)

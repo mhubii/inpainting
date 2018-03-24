@@ -1,5 +1,6 @@
 import numpy as np
 from skimage.draw import ellipse
+from tqdm import tqdm
 import scipy.misc
 import argparse
 import utils
@@ -23,8 +24,6 @@ class Create2DRandVol:
             reproducible results.
 
         """
-
-        self.vol = np.zeros([self.nx, self.ny])
 
         if seed:
             np.random.seed(seed)
@@ -52,6 +51,26 @@ class Create2DRandVol:
 
         return self.vol
 
+    # Stance circular mask.
+    def stance_circular_mask(self):
+        """
+            Creates a circular mask centered in the center
+            of the 2d volume and applies it to the volume.
+
+        """
+
+        # Center of the volume.
+        center = [int(self.ny / 2), int(self.nx / 2)]
+
+        y, x = np.ogrid[:self.nx, :self.ny]
+        dist_from_center = np.sqrt((x - center[0]) ** 2 + (y - center[1]) ** 2)
+
+        mask = dist_from_center <= min(self.nx, self.ny)*0.5
+
+        self.vol = np.multiply(self.vol, mask)
+
+        return self.vol
+
 
 if __name__ == '__main__':
     # Set some initial parameters.
@@ -67,8 +86,9 @@ if __name__ == '__main__':
     vol = Create2DRandVol(utils.N_X, utils.N_Y)
     data = np.empty([utils.N_VOL, utils.N_X, utils.N_Y])
 
-    for n in range(utils.N_VOL):
-        data[n] = vol.ellipses(args.n_mat, args.n_ell)
+    for n in tqdm(range(utils.N_VOL)):
+        vol.ellipses(args.n_mat, args.n_ell)
+        data[n] = vol.stance_circular_mask()
 
     # Save data.
     np.save('../data/rand_vol_{}'.format(utils.N_VOL), data)
