@@ -81,12 +81,25 @@ class RadonSnippets(Dataset):
 # Create a mask.
 def create_mask(n):
     """
-        Sets every every nth column of the mask to be
-        one and return it.
+        Sets every nth column of the mask to be
+        one and returns it.
 
     """
     mask = np.zeros([N_X, N_A])
     mask[:, ::n] = 1
+
+    return mask
+
+
+# Create an inverse mask.
+def create_inv_mask(n):
+    """
+        Sets every nth column of the mask to be
+        zero and returns it.
+
+    """
+    mask = np.ones([N_X, N_A])
+    mask[:, ::n] = 0
 
     return mask
 

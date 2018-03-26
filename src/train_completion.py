@@ -4,6 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 from torchvision import transforms
+from torchvision.utils import save_image
 import numpy as np
 from tqdm import tqdm
 import model_completion
@@ -21,7 +22,7 @@ def train(epoch, n_pre_train):
 
         for i in range(args.batch_size):
             n = np.random.randint(2, 9)
-            mask[i] = utils.create_mask(n)
+            mask[i] = utils.create_inv_mask(n)
 
         mask = torch.from_numpy(mask).float()
         mask = Variable(mask).cuda()
@@ -32,9 +33,9 @@ def train(epoch, n_pre_train):
             # Optimize.
             opt_com.zero_grad()
 
-            out = com(data, mask)
+            out_com = com(data, mask)
 
-            loss_com = pre_loss(out, data)
+            loss_com = pre_loss(out_com, data)
             loss_com.backward()
             opt_com.step()
 
@@ -73,6 +74,11 @@ def train(epoch, n_pre_train):
 
             loss_com.backward()
             opt_com.step()
+
+        if idx % 100 == 0:
+            save_image(data.data, '../img/progress_completion/real_radon_transform_{}.png'.format(epoch + 1), nrow=3)
+            save_image(torch.mul(data, 1 - mask).data, '../img/progress_completion/masked_radon_transform_{}.png'.format(epoch + 1), nrow=3)
+            save_image(out_com.data, '../img/progress_completion/completed_radon_transform_{}.png'.format(epoch + 1), nrow=3)
 
 
 if __name__ == '__main__':
@@ -119,5 +125,3 @@ if __name__ == '__main__':
         # Save results.
         torch.save(com.state_dict(), '../state_dict/com_epoch_{}.pth'.format(epoch + 1))
         torch.save(dis.state_dict(), '../state_dict/gl_dis.pth_epoch_{}.pth'.format(epoch + 1))
-
-

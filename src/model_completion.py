@@ -18,6 +18,8 @@ class Completion(nn.Module):
 
     def __init__(self):
         super(Completion, self).__init__()
+
+        # Completion network.
         self.completion = nn.Sequential(nn.Conv2d(1, 64, 5, 1, 2),
                                         nn.BatchNorm2d(64),
                                         nn.ReLU(),
@@ -70,8 +72,12 @@ class Completion(nn.Module):
                                         nn.Sigmoid())
 
     def forward(self, input, mask):
+
+        # Fill corrupted part of image with mean.
+        mean = torch.mean(input)
+
         # Take uncorrupted part of image as input.
-        output = torch.mul(input, 1 - mask)
+        output = torch.add(torch.mul(input, 1 - mask), torch.mul(mean, mask))
 
         # Complete the image.
         output = self.completion(output)
@@ -86,6 +92,7 @@ class Discriminator(nn.Module):
 
     def __init__(self, batch_size):
         super(Discriminator, self).__init__()
+
         # Local discriminator.
         self.local_discriminator = nn.Sequential(nn.Conv2d(1, 64, 5, 2),
                                                  nn.BatchNorm2d(64),
@@ -142,6 +149,7 @@ class Discriminator(nn.Module):
         self.grid = Variable(self.grid).cuda()
 
     def forward(self, local_input, global_input):
+
         # Forward local and global discriminator.
         local_output = self.local_discriminator(local_input)
         local_output = local_output.view(local_output.shape[0], 1, 1, -1)
