@@ -112,23 +112,21 @@ class Discriminator(nn.Module):
                                                   nn.BatchNorm2d(512),
                                                   nn.ReLU())
         self.fc1 = nn.Linear(512, 1024)
-        self.fc1_bn = nn.BatchNorm1d(1024)
         self.fc2 = nn.Linear(512, 1024)
-        self.fc2_bn = nn.BatchNorm1d(1024)
         self.fc3 = nn.Linear(2048, 1)
 
     def forward(self, local_input, global_input):
         # Forward local and global discriminator.
         local_output = self.local_discriminator(local_input)
-        local_output = local_output.view(1, 1, 1, -1)
-        local_output = F.relu(self.fc1_bn(self.fc1(local_output)))
-        
+        local_output = local_output.view(local_output.shape[0], 1, 1, -1)
+        local_output = self.fc1(local_output)
+
         global_output = self.global_discriminator(global_input)
-        global_output = global_output.view(1, 1, 1, -1)
-        global_output = F.relu(self.fc2_bn(self.fc2(global_output)))
+        global_output = global_output.view(local_output.shape[0], 1, 1, -1)
+        global_output = self.fc2(global_output)
 
         # Concatenate outputs and determine viability.
         output = torch.cat((local_output, global_output), 3)
-        output = F.sigmoid(self.fc(output))
+        output = F.sigmoid(self.fc3(output))
 
         return output

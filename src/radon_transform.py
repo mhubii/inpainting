@@ -44,13 +44,14 @@ def single_radon_transform(n):
     data.reshape([utils.N_VOL, utils.N_X, utils.N_Y])
 
     # Perform the radon transformation.
-    angles = np.linspace(0., utils.A, utils.N_A, endpoint=False)
+    angles = np.linspace(0., utils.A, 25, endpoint=False)
 
     rad = radon(data[n], angles, circle=True)
 
     data = np.asarray(rad).reshape([rad.shape[0], rad.shape[1]])
 
     scipy.misc.imsave('../img/rand_ell_rad.png', data)
+
 
 # Save.
 def save():
@@ -103,4 +104,4 @@ if __name__ == '__main__':
 
     # Save results.
     # save()
-    save_as_snippets()
+    # save_as_snippets()

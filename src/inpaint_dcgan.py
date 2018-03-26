@@ -21,7 +21,7 @@ radon = radon/127.5 - 1.
 
 
 # Apply mask.
-mask = utils.create_mask(4)
+mask = utils.create_mask(14)
 masked_radon = np.multiply(radon, mask)
 
 

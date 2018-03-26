@@ -4,6 +4,7 @@ import csv
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset
+import skimage.transform
 
 
 # Generally used parameters.
@@ -25,11 +26,8 @@ class RadonTransforms(Dataset):
 
     """
 
-    def __init__(self, csv_loc, mask_loc, transform=None):
+    def __init__(self, csv_loc, transform=None):
         self.csv_loc = list()
-        self.mask = scipy.misc.imread(mask_loc)
-        self.mask = np.expand_dims(self.mask, 2)
-
         self.transform = transform
 
         with open(csv_loc, 'r') as my_file:
@@ -41,12 +39,10 @@ class RadonTransforms(Dataset):
         radon_transform = scipy.misc.imread(loc)
         radon_transform = np.expand_dims(radon_transform, 2)
 
-        sample = np.concatenate((radon_transform, self.mask), 2)
-
         if self.transform is not None:
-            sample = self.transform(sample)
+            radon_transform = self.transform(radon_transform)
 
-        return sample
+        return radon_transform
 
     def __len__(self):
         return len(self.csv_loc)
