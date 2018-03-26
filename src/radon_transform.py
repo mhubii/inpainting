@@ -44,7 +44,7 @@ def single_radon_transform(n):
     data.reshape([utils.N_VOL, utils.N_X, utils.N_Y])
 
     # Perform the radon transformation.
-    angles = np.linspace(0., utils.A, 25, endpoint=False)
+    angles = np.linspace(0., utils.A, utils.N_A, endpoint=False)
 
     rad = radon(data[n], angles, circle=True)
 

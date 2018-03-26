@@ -1,7 +1,6 @@
 import numpy as np
 from skimage.transform import iradon
 import scipy.misc
-import matplotlib.pyplot as plt
 import utils
 
 

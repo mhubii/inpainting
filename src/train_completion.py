@@ -16,21 +16,25 @@ def train(epoch, n_pre_train):
 
         data = Variable(data).cuda()
 
+        # Randomly generate masks.
+        mask = np.empty((args.batch_size, 1, data.shape[2], data.shape[3]))
+
+        for i in range(args.batch_size):
+            n = np.random.randint(2, 9)
+            mask[i] = utils.create_mask(n)
+
+        mask = torch.from_numpy(mask).float()
+        mask = Variable(mask).cuda()
+
         # Pre-train the completion network.
         if epoch < n_pre_train:
-            # Randomly generate a mask.
-            n = np.random.randint(2, 11)
-
-            mask = utils.create_mask(n)
-            mask = torch.from_numpy(mask).float()
-            mask = Variable(mask).cuda()
 
             # Optimize.
             opt_com.zero_grad()
-            # TODO take masked data as input and initialize masked regions with mean value.
-            out = com(data)
 
-            loss_com = pre_loss(torch.mul(out, mask), torch.mul(data, mask))
+            out = com(data, mask)
+
+            loss_com = pre_loss(out, data)
             loss_com.backward()
             opt_com.step()
 
@@ -43,45 +47,29 @@ def train(epoch, n_pre_train):
             real_label = Variable(torch.ones(args.batch_size)).cuda()
             fake_label = Variable(torch.zeros(args.batch_size)).cuda()
 
-            out = com(data)
+            out_com = com(data, mask)
 
             # Random local sample.
             n_x = np.random.randint(0, data.shape[2] - 128)
             n_y = np.random.randint(0, data.shape[3] - 128)
 
             in_local_real = data[:, :, n_x:n_x + 128, n_y:n_y + 128]
-            in_local_fake = out[:, :, n_x:n_x + 128, n_y:n_y + 128]
-
-            # Global sample.
-            in_global_real = F.grid_sample(data, grid)
-            in_global_fake = F.grid_sample(out, grid)
+            in_local_fake = out_com[:, :, n_x:n_x + 128, n_y:n_y + 128]
 
             # Optimize.
-            out = dis(in_local_real, in_global_real)
-            loss_dis = adv_loss(out, real_label)
+            out_dis = dis(in_local_real, data)
+            loss_dis = adv_loss(out_dis, real_label)
 
-            out = dis(in_local_fake, in_global_fake)
-            loss_dis += adv_loss(out, fake_label)
+            out_dis = dis(in_local_fake, out_com)
+            loss_dis += adv_loss(out_dis, fake_label)
 
-            loss_dis.backward(retain_graph=True)
+            loss_dis.backward()
             opt_dis.step()
-
-            # Randomly generate a mask.
-            n = np.random.randint(2, 11)
-
-            mask = utils.create_mask(n)
-            mask = torch.from_numpy(mask).float()
-            mask = Variable(mask).cuda()
 
             # Train completion to fool discriminator.
             opt_com.zero_grad()
 
-            out_com = com(data)
-            in_global_fake = F.grid_sample(out_com, grid)
-
-            out = dis(in_local_fake, in_global_fake)
-
-            loss_com = pre_loss(torch.mul(out_com, mask), torch.mul(data, mask)) + adv_loss(out, real_label)
+            loss_com = pre_loss(out_com, data) + adv_loss(out_dis, real_label)
 
             loss_com.backward()
             opt_com.step()
@@ -90,11 +78,11 @@ def train(epoch, n_pre_train):
 if __name__ == '__main__':
     # Some initial settings
     parser = argparse.ArgumentParser(description='Training of completion network for inpainting.')
-    parser.add_argument('-batch_size', type=int, default=4,
+    parser.add_argument('-batch_size', type=int, default=6,
                         help='Batch size (default = 128).')
     parser.add_argument('-num_workers', type=int, default=1,
                         help='Number of workers to load data (default = 2).')
-    parser.add_argument('-epochs', type=int, default=10,
+    parser.add_argument('-epochs', type=int, default=20,
                         help='Number of epochs (default = 10).')
     parser.add_argument('-csv_dir', type=str, default='../data/locations',
                         help='Location where the .csv file is stored that holds all file names (default = ../data/locations).')
@@ -105,7 +93,7 @@ if __name__ == '__main__':
 
     # Load completion network and discriminator.
     com = model_completion.Completion().cuda()
-    dis = model_completion.Discriminator().cuda()
+    dis = model_completion.Discriminator(args.batch_size).cuda()
 
     # Set up data loader.
     data_set = utils.RadonTransforms(args.csv_dir,
@@ -125,21 +113,8 @@ if __name__ == '__main__':
     pre_loss = nn.MSELoss().cuda()
     adv_loss = nn.BCELoss().cuda()
 
-    # Interpolation to resize input to 256 x 256 for global discriminator.
-    x = np.linspace(-1, 1, 256)
-    y = np.linspace(-1, 1, 256)
-
-    xv, yv = np.meshgrid(x, y)
-
-    grid = np.stack((xv, yv), axis=2)
-    grid = np.expand_dims(grid, 0)
-    grid = np.repeat(grid, args.batch_size, 0)
-
-    grid = torch.from_numpy(grid).float()
-    grid = Variable(grid).cuda()
-
     for epoch in range(args.epochs):
-        train(epoch, 2)
+        train(epoch, 5)
 
         # Save results.
         torch.save(com.state_dict(), '../state_dict/com_epoch_{}.pth'.format(epoch + 1))
