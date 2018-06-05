@@ -40,5 +40,9 @@ To compensate for the reduced information that one obtains from such a radon tra
 
 ## Methods
 
+## Comparison
+
+## Outlook
+
 ## Literature
 [<a name="1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
