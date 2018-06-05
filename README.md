@@ -45,14 +45,14 @@ For the inpainting we test 2 methods. The first method is based on a DCGAN archi
 
 <br>
 <figure>
-  <p align="center"><img src="generative_inpainting/img/masked.png" width="20%" height="20%" hspace="40"><img src="generative_inpainting/img/inpainted.png" width="20%" height="20%" hspace="40"><img src="autoencoded_inpainting/img/inpainted.png" width="20%" height="20%" hspace="40"></p>
+  <p align="center"><img src="generative_inpainting/img/masked.png" width="20%" height="20%" hspace="40"><img src="generative_inpainting/img/optimal.png" width="20%" height="20%" hspace="40"><img src="autoencoded_inpainting/img/inpainted.png" width="20%" height="20%" hspace="40"></p>
   <figcaption>Fig. 4: (Left) Radon transform using only 25% dose. (Center) Inpainted radon transform using a DCGAN. (Right) Inpainted radon transform using an AE. </figcaption>
 </figure>
 <br><br>
 
 <br>
 <figure>
-  <p align="center"><img src="generative_inpainting/img/original_reco.png" width="20%" height="20%" hspace="40"><img src="generative_inpainting/img/inpainted_reco.png" width="20%" height="20%" hspace="40"><img src="autoencoded_inpainting/img/inpainted_reco.png" width="20%" height="20%" hspace="40"></p>
+  <p align="center"><img src="generative_inpainting/img/reco_original.png" width="20%" height="20%" hspace="40"><img src="generative_inpainting/img/reco_optimal.png" width="20%" height="20%" hspace="40"><img src="autoencoded_inpainting/img/inpainted_reco.png" width="20%" height="20%" hspace="40"></p>
   <figcaption>Fig. 5: (Left) Reconstruction of original radon transform. (Center) Reconstruction using the DCGAN inpainted radon transform. (Right) Reconstruction using the AE inpainted radon transform. </figcaption>
 </figure>
 <br><br>
