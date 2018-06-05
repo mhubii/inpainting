@@ -1,6 +1,6 @@
 # Autoencoded Inpainting
 
-As proposed in [<a href="#1">1</a>] an autoencoder can be used for inpainting purposes. Key to this approach is the use of dilated convolutions in the bottleneck of the autoencoder (AE), to effectively increase the receptive field and to thus generate globally consistent inpaintings. Further, a local and global discriminator are used to enhance local and global consistency further.
+As proposed in [<a href="#1">1</a>] an autoencoder can be used for inpainting purposes. Key to this approach is the use of dilated convolutions in the bottleneck of the AE, to effectively increase the receptive field and to thus generate globally consistent inpaintings. Further, a local and global discriminator are used to enhance local and global consistency further.
 
 ## Results
 
