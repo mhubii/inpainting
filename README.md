@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Our goal is to perform an inpainting for computer tomographic (CT) images, to reduce the dose a patient has to undergo during an examination. We take advantage of recent developments in the architecture of neural nets and utilize so called deep convolutional generative adversarial neural nets (DCGANs).
+Our goal is to perform an inpainting for computer tomographic (CT) images, to reduce the dose a patient has to undergo during an examination. We take advantage of recent developments in the architecture of neural nets and utilize so called deep convolutional generative adversarial neural nets (DCGANs) as well as an autoencoder which is trained in an adversarial fashion.
 
 ### Radon Transforms
 
@@ -36,7 +36,9 @@ In order to reduce the radiation, a patient has to undergo, one can simply reduc
 </figure>
 <br><br>
 
-To compensate for the reduced information that one obtains from such a radon transform, we employ a DCGAN for inpainting the unkown regions. Please note that due to aliasing the masked regions of the radon transform can be barely seen on a computer screen.
+To compensate for the reduced information that one obtains from such a radon transform, we test two methods for inpainting the unkown regions.
 
 ## Methods
 
+## Literature
+[<a name="1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
