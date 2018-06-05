@@ -5,9 +5,13 @@ import utils
 
 
 # Load image.
-original = scipy.misc.imread('../img/original_rad.png')
+# original = scipy.misc.imread('../img/original_rad.png')
+# masked = scipy.misc.imread('../img/masked_rad.png')
+# optimal = scipy.misc.imread('../img/optimal.png')
+
+original = scipy.misc.imread('../img/completion_original.png')
 masked = scipy.misc.imread('../img/masked_rad.png')
-optimal = scipy.misc.imread('../img/optimal.png')
+optimal = scipy.misc.imread('../img/completion_inpainted.png')
 
 
 # Perform filtered back projection.
@@ -21,6 +25,10 @@ optimal = iradon(optimal, angles_optimal, circle=True)
 
 
 # Save results.
-scipy.misc.imsave('../img/reco_original.png', original)
-scipy.misc.imsave('../img/reco_masked.png', masked)
-scipy.misc.imsave('../img/reco_optimal.png', optimal)
+# scipy.misc.imsave('../img/reco_original.png', original)
+# scipy.misc.imsave('../img/reco_masked.png', masked)
+# scipy.misc.imsave('../img/reco_optimal.png', optimal)
+
+scipy.misc.imsave('../img/completion_reco_original.png', original)
+scipy.misc.imsave('../img/completion_reco_masked.png', masked)
+scipy.misc.imsave('../img/completion_reco_inpainted.png', optimal)

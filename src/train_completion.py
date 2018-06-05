@@ -12,7 +12,7 @@ import utils
 
 
 # Train policy.
-def train(epoch, n_pre_train):
+def train(epoch, n_pre_com, n_pre_dis):
     for idx, data in enumerate(tqdm(data_loader)):
 
         data = Variable(data).cuda()
@@ -21,14 +21,14 @@ def train(epoch, n_pre_train):
         mask = np.empty((args.batch_size, 1, data.shape[2], data.shape[3]))
 
         for i in range(args.batch_size):
-            n = np.random.randint(2, 9)
-            mask[i] = utils.create_inv_mask(n)
+            # n = np.random.randint(2, 9)
+            mask[i] = utils.create_inv_mask(4)
 
         mask = torch.from_numpy(mask).float()
         mask = Variable(mask).cuda()
 
         # Pre-train the completion network.
-        if epoch < n_pre_train:
+        if epoch < n_pre_com:
 
             # Optimize.
             opt_com.zero_grad()
@@ -39,14 +39,11 @@ def train(epoch, n_pre_train):
             loss_com.backward()
             opt_com.step()
 
-        # Perform adversarial training.
-        else:
+        # Pre-train the discriminator.
+        elif n_pre_com <= epoch < n_pre_dis:
 
-            # Train discriminator.
+            # Optimize.
             opt_dis.zero_grad()
-
-            real_label = Variable(torch.ones(args.batch_size)).cuda()
-            fake_label = Variable(torch.zeros(args.batch_size)).cuda()
 
             out_com = com(data, mask)
 
@@ -57,7 +54,10 @@ def train(epoch, n_pre_train):
             in_local_real = data[:, :, n_x:n_x + 128, n_y:n_y + 128]
             in_local_fake = out_com[:, :, n_x:n_x + 128, n_y:n_y + 128]
 
-            # Optimize.
+            # Labels for real data and completed data.
+            real_label = Variable(torch.ones(args.batch_size, 1, 1, 1)).cuda()
+            fake_label = Variable(torch.zeros(args.batch_size, 1, 1, 1)).cuda()
+
             out_dis = dis(in_local_real, data)
             loss_dis = adv_loss(out_dis, real_label)
 
@@ -67,24 +67,53 @@ def train(epoch, n_pre_train):
             loss_dis.backward()
             opt_dis.step()
 
+        # Perform adversarial training.
+        else:
+
+            # Train discriminator.
+            opt_dis.zero_grad()
+
+            out_com = com(data, mask)
+
+            # Random local sample.
+            n_x = np.random.randint(0, data.shape[2] - 128)
+            n_y = np.random.randint(0, data.shape[3] - 128)
+
+            in_local_real = data[:, :, n_x:n_x + 128, n_y:n_y + 128]
+            in_local_fake = out_com[:, :, n_x:n_x + 128, n_y:n_y + 128]
+
+            # Labels for real data and completed data.
+            real_label = Variable(torch.ones(args.batch_size, 1, 1, 1)).cuda()
+            fake_label = Variable(torch.zeros(args.batch_size, 1, 1, 1)).cuda()
+
+            # Optimize.
+            out_dis = dis(in_local_real, data)
+            loss_dis = adv_loss(out_dis, real_label)
+
+            out_dis = dis(in_local_fake, out_com)
+            loss_dis += adv_loss(out_dis, fake_label)
+
+            loss_dis.backward(retain_graph=True)
+            opt_dis.step()
+
             # Train completion to fool discriminator.
             opt_com.zero_grad()
 
-            loss_com = pre_loss(out_com, data) + adv_loss(out_dis, real_label)
+            loss_com = pre_loss(out_com, data) + alpha*adv_loss(out_dis, real_label)
 
             loss_com.backward()
             opt_com.step()
 
         if idx % 100 == 0:
-            save_image(data.data, '../img/progress_completion/real_radon_transform_{}.png'.format(epoch + 1), nrow=3)
-            save_image(torch.mul(data, 1 - mask).data, '../img/progress_completion/masked_radon_transform_{}.png'.format(epoch + 1), nrow=3)
-            save_image(out_com.data, '../img/progress_completion/completed_radon_transform_{}.png'.format(epoch + 1), nrow=3)
+            save_image(data.data, '../img/progress_completion/real_radon_transform_{}.png'.format(epoch + 1), nrow=2)
+            save_image(torch.mul(data, 1 - mask).data, '../img/progress_completion/masked_radon_transform_{}.png'.format(epoch + 1), nrow=2)
+            save_image(out_com.data, '../img/progress_completion/completed_radon_transform_{}.png'.format(epoch + 1), nrow=2)
 
 
 if __name__ == '__main__':
     # Some initial settings
     parser = argparse.ArgumentParser(description='Training of completion network for inpainting.')
-    parser.add_argument('-batch_size', type=int, default=6,
+    parser.add_argument('-batch_size', type=int, default=4,
                         help='Batch size (default = 128).')
     parser.add_argument('-num_workers', type=int, default=1,
                         help='Number of workers to load data (default = 2).')
@@ -100,6 +129,10 @@ if __name__ == '__main__':
     # Load completion network and discriminator.
     com = model_completion.Completion().cuda()
     dis = model_completion.Discriminator(args.batch_size).cuda()
+
+    # Load pre-trained models.
+    # com.load_state_dict(torch.load('../state_dict/com_pre.pth'))
+    # dis.load_state_dict(torch.load('../state_dict/gl_dis_pre.pth'))
 
     # Set up data loader.
     data_set = utils.RadonTransforms(args.csv_dir,
@@ -119,9 +152,12 @@ if __name__ == '__main__':
     pre_loss = nn.MSELoss().cuda()
     adv_loss = nn.BCELoss().cuda()
 
+    # Weighting of adversarial loss.
+    alpha = 1e-3
+
     for epoch in range(args.epochs):
-        train(epoch, 5)
+        train(epoch, 1, 1)
 
         # Save results.
         torch.save(com.state_dict(), '../state_dict/com_epoch_{}.pth'.format(epoch + 1))
-        torch.save(dis.state_dict(), '../state_dict/gl_dis.pth_epoch_{}.pth'.format(epoch + 1))
+        torch.save(dis.state_dict(), '../state_dict/gl_dis_epoch_{}.pth'.format(epoch + 1))
