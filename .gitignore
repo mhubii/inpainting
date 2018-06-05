@@ -1,8 +1,8 @@
 ### Data ###
-data
+*data
 
-### State Dictionaries ###
-state_dict
+### State Dict ###
+*state_dict
 
 ### Pycharm ###
 *__pycache__
@@ -10,5 +10,5 @@ state_dict
 ### Jupyter Notebook ###
 *.ipynb
 
-### Files ###
-src/gif_creator.py
+### Literature ###
+literature
