@@ -39,7 +39,7 @@ In order to reduce the radiation, a patient has to undergo, one can simply reduc
 To compensate for the reduced information that one obtains from such a radon transform, we test two methods for inpainting the unkown regions.
 
 ## Methods
-For the inpainting we test 2 methods. The first method is based on a DCGAN architecture from [<a href="#3">#3</a>], and learns to generate snippets of radon transformations from a random input. To obtain the most likely inpainting, one optimizes for the random input, as shown in [<a href="#2">2</a>]. The snippets are then put together to inpaint a whole radon transformation. The second method is based on an AE that makes use of dilated convolutions to increase the receptive field and is trained in an adversarial fashion using both, a global and a local discriminator network [<a href="#4">4</a>].
+For the inpainting we test 2 methods. The first method is based on a [DCGAN](generative_architecture "Folder of Generative Architecture") architecture from [<a href="#3">3</a>], and learns to generate snippets of radon transformations from a random input. To obtain the most likely inpainting, one optimizes for the random input, as shown in [<a href="#2">2</a>]. The snippets are then put together to inpaint a whole radon transformation. The second method is based on an AE that makes use of dilated convolutions to increase the receptive field and is trained in an adversarial fashion using both, a global and a local discriminator network [<a href="#4">4</a>].
 
 ## Comparison
 
