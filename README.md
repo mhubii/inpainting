@@ -62,7 +62,7 @@ The reconstructed images overall represent the finding of the lacking global str
 <br><br>
 
 ## Outlook
-The AE encoder shows promising results and should further be investigated with some small adjustments, as explained [here](autoencoding_inpainting "Folder to AE Inpainting").
+The AE encoder shows promising results and should further be investigated with some small adjustments, as explained [here](autoencoded_inpainting "Folder to AE Inpainting").
 
 ## Literature
 [<a name="1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
