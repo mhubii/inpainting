@@ -1,5 +1,5 @@
 # Generative Inpainting
-As proposed in [<a href="#2">2</a>], a DCGAN can be used for inpainting purposes. For the architecture of the DCGAN, we follow the recipe propsoed by [<a href="#3">3</a>]. Since this technique works  well for small image sizes but doesnt for highly resolved images, as in our case, we simply train the algorithm on smaller image snippets.
+As proposed in [<a href="#1">1</a>], a DCGAN can be used for inpainting purposes. For the architecture of the DCGAN, we follow the recipe propsoed by [<a href="#2">2</a>]. Since this technique works  well for small image sizes but doesnt for highly resolved images, as in our case, we simply train the algorithm on smaller image snippets.
 
 ## Results
 The DCGAN produces radon transform snippets that can be hardly distinguished from real radon transform snippets as shown below. The network learns to model the smooth transitions in a radon transform.
@@ -33,8 +33,6 @@ The reconstructed images (Figure 6) reveal that the inpainted radon transform re
 The presented method, as it is, does not work well to perform inpaintings on radon transformations. Other techniques have to be investigated to take the the global structures into account. Further, more computational power and a bigger training set could increase the resultion of the images.
 
 ## Literature
-[<a name="1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
+[<a name="1">1</a>] [Semantic Image Inpainting with Deep Generative Models](https://arxiv.org/abs/1607.07539 "Link to arXiv")
 
-[<a name="2">2</a>] [Semantic Image Inpainting with Deep Generative Models](https://arxiv.org/abs/1607.07539 "Link to arXiv")
-
-[<a name="3">3</a>] [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434 "Link to arXiv")
+[<a name="2">2</a>] [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434 "Link to arXiv")
