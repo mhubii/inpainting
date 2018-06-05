@@ -39,9 +39,11 @@ In order to reduce the radiation, a patient has to undergo, one can simply reduc
 To compensate for the reduced information that one obtains from such a radon transform, we test two methods for inpainting the unkown regions.
 
 ## Methods
-For the inpainting we test 2 methods. The first method is based on a [DCGAN](generative_inpainting "Folder of DCGAN Inpainting") architecture from [<a href="#3">3</a>], and learns to generate snippets of radon transformations from a random input. To obtain the most likely inpainting, one optimizes for the random input, as shown in [<a href="#2">2</a>]. The snippets are then put together to inpaint a whole radon transformation. The second method is based on an [AE](autoencoding_inpainting "Folder to AE Inpainting") that makes use of dilated convolutions to increase the receptive field and is trained in an adversarial fashion using both, a global and a local discriminator network [<a href="#4">4</a>].
+For the inpainting we test 2 methods. The first method is based on a DCGAN architecture from [<a href="#3">3</a>], and learns to generate snippets of radon transformations from a random input. To obtain the most likely inpainting, one optimizes for the random input, as shown in [<a href="#2">2</a>]. The snippets are then put together to inpaint a whole radon transformation. The second method is based on an AE that makes use of dilated convolutions to increase the receptive field and is trained in an adversarial fashion using both, a global and a local discriminator network [<a href="#4">4</a>].
 
 ## Comparison
+
+We can see that compared to the generative approach (Figure 4, center), the autoencoded approach (Figure 4, right) inpaints the radon transform with a global structure.
 
 <br>
 <figure>
@@ -49,6 +51,8 @@ For the inpainting we test 2 methods. The first method is based on a [DCGAN](gen
   <figcaption>Fig. 4: (Left) Radon transform using only 25% dose. (Center) Inpainted radon transform using a DCGAN. (Right) Inpainted radon transform using an AE. </figcaption>
 </figure>
 <br><br>
+
+The reconstructed images overall represent the finding of the lacking global structure for the generative inpainting, which results in ring artifacts (Figure 5, center). Both resulting reconstruction are, due to the removed information,  a little blurry.
 
 <br>
 <figure>
@@ -58,6 +62,7 @@ For the inpainting we test 2 methods. The first method is based on a [DCGAN](gen
 <br><br>
 
 ## Outlook
+The AE encoder shows promising results and should further be investigated with some small adjustments, as explained [here](autoencoding_inpainting "Folder to AE Inpainting").
 
 ## Literature
 [<a name="1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
