@@ -62,7 +62,7 @@ The reconstructed images overall represent the finding of the lacking global str
 <br><br>
 
 ## Outlook
-The AE encoder shows promising results and should further be investigated with some small adjustments, as explained in the conclusion [here](autoencoded_inpainting "Folder to AE Inpainting").
+One huge advantage of the AE over the DCGAN approach is that the AE needs no further optimization step to perform the inpainting and is thus faster by at least a factor of 10. Given that CT images usually involve a huge number of images, further improvements to the DCGAN approach with for example greater image snippets might not be as conducive. The AE encoder on the other hand shows promising results and should further be investigated with some small adjustments, as explained in the conclusion [here](autoencoded_inpainting "Folder to AE Inpainting").
 
 ## Literature
 [<a name="1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
