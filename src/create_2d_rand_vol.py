@@ -92,5 +92,5 @@ if __name__ == '__main__':
 
     # Save data.
     np.save('../data/rand_vol_{}'.format(utils.N_VOL), data)
-    scipy.misc.imsave('../img/rand_ell.png', data[0])
+    # scipy.misc.imsave('../img/rand_ell.png', data[0])
 
