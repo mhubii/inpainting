@@ -62,7 +62,14 @@ The reconstructed images overall represent the finding of the lacking global str
 <br><br>
 
 ## Outlook
-One huge advantage of the AE over the DCGAN approach is that the AE needs no further optimization step to perform the inpainting and is thus faster by at least a factor of 10. Given that CT images usually involve a huge number of images, further improvements to the DCGAN approach with for example greater image snippets might not be as conducive. The AE encoder on the other hand shows promising results and should further be investigated with some small adjustments, as explained in the conclusion [here](autoencoded_inpainting "Folder to AE Inpainting"). We especially want to point out that with the unofficial release of PyTorch 0.4.0 and above, there will be Fourier methods added. Using these Fourier methods, one can add a layer to the neural network that performs a reconstruction, as explained in [<a href="#5">5</a>] of the inpainted radon transform, thus making it possible to not only account for the radon space but for the object space as well. 
+One huge advantage of the AE over the DCGAN approach is that the AE needs no further optimization step to perform the inpainting and is thus faster by at least a factor of 10. Given that CT images usually involve a huge number of images, further improvements to the DCGAN approach with for example greater image snippets might not be as conducive. The AE encoder on the other hand shows promising results and should further be investigated with some small adjustments, as explained in the conclusion [here](autoencoded_inpainting "Folder to AE Inpainting"). We especially want to point out that with the unofficial release of PyTorch 0.4.0 and above, there will be Fourier methods added. Using these Fourier methods, one can add a layer to the neural network that performs a reconstruction, as explained in [<a href="#5">5</a>] of the inpainted radon transform, thus making it possible to not only account for the radon space but for the object space as well. An example of a Fourier based reconstruction is presented in figure 6.
+
+<br>
+<figure>
+  <p align="center"><img src="img/fourier_reconstruction.png" width="20%" height="20%"></p>
+  <figcpation>Fig. 6: Fourier based reconstruction method. </figcaption>
+</figure>
+<br><br>
 
 ## Literature
 [<a name="1">1</a>] [Liver CT Scan](https://upload.wikimedia.org/wikipedia/en/0/06/R_vs_L_Liver_by_CT.PNG "Link to Wikipedia")
@@ -73,4 +80,4 @@ One huge advantage of the AE over the DCGAN approach is that the AE needs no fur
 
 [<a name="4">4</a>] [Globally and Locally Consistent Image Completion](http://hi.cs.waseda.ac.jp/~iizuka/projects/completion/data/completion_sig2017.pdf "Link to Their Website")
 
-[<a name="5">4</a>] [Fourier Methods in CT: Projection and Reconstruction Algorithms](http://bioeng2003.fc.ul.pt/Conference%20Files/papers/De%20Francesco,%20Fourier.pdf "Link to Paper")
+[<a name="5">5</a>] [Fourier Methods in CT: Projection and Reconstruction Algorithms](http://bioeng2003.fc.ul.pt/Conference%20Files/papers/De%20Francesco,%20Fourier.pdf "Link to Paper")
