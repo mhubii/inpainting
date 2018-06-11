@@ -66,7 +66,7 @@ One huge advantage of the AE over the DCGAN approach is that the AE needs no fur
 
 <br>
 <figure>
-  <p align="center"><img src="img/fourier_reconstruction.png" width="20%" height="20%"></p>
+  <p align="center"><img src="img/fourier_reconstruction.png" width="40%" height="40%"></p>
   <figcpation>Fig. 6: Fourier based reconstruction method. </figcaption>
 </figure>
 <br><br>
