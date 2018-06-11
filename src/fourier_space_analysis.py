@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import scipy.misc
 
 # Perform fourier reconstruction with numpy.
-rad = scipy.misc.imread('/home/martin/Documents/inpainting/autoencoded_inpainting/img/original.png')
-inp = scipy.misc.imread('/home/martin/Documents/inpainting/autoencoded_inpainting/img/inpainted.png')
+rad = scipy.misc.imread('../autoencoded_inpainting/img/original.png')
+inp = scipy.misc.imread('../autoencoded_inpainting/img/inpainted.png')
 
 # Perform FFT.
 ffts = [np.fft.fft2(rad), np.fft.fft2(inp)]
@@ -23,8 +23,6 @@ for idx, fft in enumerate(ffts):
 
     mask = dist_from_center >= min(fft.shape[0], fft.shape[1]) * 0.5
 
-    #fshift = mask*fshift
-    #magnitude_spectrum = mask*magnitude_spectrum
 
     rad = np.fft.ifftshift(fshift)
     rad = np.fft.ifft2(rad)
