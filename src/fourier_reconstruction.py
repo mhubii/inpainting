@@ -68,4 +68,5 @@ plt.imshow(np.real(reco), cmap='gray')
 plt.title('2D Inverse Fourier Transform')
 plt.axis('off')
 
+# plt.show()
 plt.savefig('../img/fourier_reconstruction.png')
