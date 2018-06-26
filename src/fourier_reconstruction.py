@@ -1,4 +1,5 @@
 import numpy as np
+from numpy import inf
 import matplotlib.pyplot as plt
 import scipy.misc
 import scipy.interpolate
@@ -13,10 +14,13 @@ rad = scipy.misc.imread('../autoencoded_inpainting/img/original.png')
 fft = np.fft.fft(np.fft.ifftshift(rad, axes=0), axis=0)
 fft_shift = np.fft.fftshift(fft, axes=0)
 
+plt.imshow(np.log(np.abs(fft_shift)))
+plt.show()
+
 
 # Transform to 2D Fourier Space for the Slice Theorem.
 radius = np.arange(rad.shape[0]) - 0.5*rad.shape[0]
-alpha = np.arange(0, rad.shape[1], 1)*np.pi/180
+alpha = np.arange(0, rad.shape[1], 1)*np.pi/180 + 0.5*np.pi
 
 radius, alpha = np.meshgrid(radius, alpha)
 
@@ -36,7 +40,7 @@ dst_x = dst_x.flatten()
 dst_y = dst_y.flatten()
 
 fft2 = scipy.interpolate.griddata(
-    (src_x, src_y),
+    (src_y, src_x),
     fft_shift.T.flatten(),
     (dst_x, dst_y),
     method='cubic',
@@ -45,7 +49,6 @@ fft2 = scipy.interpolate.griddata(
 
 # Perform 2D inverse Fast Fourier Transform.
 reco = np.fft.fftshift(np.fft.ifft2(np.fft.ifftshift(fft2)))
-
 
 # Show results.
 plt.subplot(221)
@@ -70,3 +73,15 @@ plt.axis('off')
 
 # plt.show()
 plt.savefig('../img/fourier_reconstruction.png')
+
+"""
+fft_shift = np.log(np.abs(fft_shift))
+fft_shift[fft_shift == -inf] = 0
+
+fft2 = np.log(np.abs(fft2))
+fft2[fft2 == -inf] = 0
+
+scipy.misc.imsave('../img/1d_fourier.png', fft_shift)
+scipy.misc.imsave('../img/2d_fourier_mapping.png', fft2)
+scipy.misc.imsave('../img/fourier_reco.png', np.real(reco))
+"""

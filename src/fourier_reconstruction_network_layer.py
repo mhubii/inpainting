@@ -5,6 +5,13 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 
+"""
+
+Currently dependent on the implementations of the fftshift and
+ifftshift functions in pytorch, which are not implemented yet.
+
+"""
+
 
 # Fourier reconstruction network.
 """
@@ -63,7 +70,8 @@ plt.show()
 # There is currently no implementation of fftshift that support autograd.
 
 
-# Transform from spherical to cartesian coordinates.
+# Transform from cylindrical to cartesian coordinates.
+
 
 
 # Perform 2D inverse Fourier Transform.
