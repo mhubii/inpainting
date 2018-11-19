@@ -1,4 +1,4 @@
-# Inpainting for CT Scans
+# Inpainting for CT and PET Scans
 
 ## Introduction
 
